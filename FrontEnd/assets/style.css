@@ -125,6 +125,38 @@ li:hover {
 	text-align: center;
 	margin-bottom: 1em;
 }
+#barre-filtres {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+	gap: 10px;
+	margin-top: 51px;
+	margin-bottom: 51px;
+}
+#btn-tous, #btn-objets {
+	width: 100px;
+}
+#btn-appartements {
+	width: 157px;
+}
+#btn-hotels {
+	width: 198px;
+}
+.btn {
+	color: #1D6154;
+	font-family: "Syne";
+	font-size: 16px;
+	font-weight: 700;
+	background-color: white;
+	border-color: #1D6154;
+	border-style: solid;
+	border-radius: 20px 20px 20px 20px;
+	height: 37px;
+}
+.btn:focus {
+	color: white;
+	background-color: #1D6154;
+}
 .gallery {
 	width: 100%;
 	display: grid;
@@ -135,11 +167,10 @@ li:hover {
 
 .gallery img {
 	width: 100%;
-
 }
 #contact {
 	width: 50%;
-margin: auto;
+	margin: auto;
 }
 #contact > * {
 	text-align: center;
