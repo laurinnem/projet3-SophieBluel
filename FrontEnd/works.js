@@ -29,5 +29,40 @@ function genererWorks(works){
 
 genererWorks(works);
 
+//boutons filtres
+const boutonTous = document.querySelector(".btn-tous");
+boutonTous.addEventListener("click", function () {
+    const tousFiltre = works.filter(function () {
+        return works;
+    })
+    document.querySelector(".gallery").innerHTML = "";
+    genererWorks(works);
+})
 
+const boutonObjets = document.querySelector(".btn-objets");
+boutonObjets.addEventListener("click", function () {
+    const objetsFiltre = works.filter(function (works) {
+        return works.category.name === "Objets";
+    });
+    document.querySelector(".gallery").innerHTML = "";
+    genererWorks(objetsFiltre);
+})
+
+const boutonAppartements = document.querySelector(".btn-appartements");
+boutonAppartements.addEventListener("click", function () {
+    const objetsFiltre = works.filter(function (works) {
+        return works.category.name === "Appartements";
+    });
+    document.querySelector(".gallery").innerHTML = "";
+    genererWorks(objetsFiltre);
+})
+
+const boutonHotels = document.querySelector(".btn-hotels");
+boutonHotels.addEventListener("click", function () {
+    const objetsFiltre = works.filter(function (works) {
+        return works.category.name === "Hotels & restaurants";
+    });
+    document.querySelector(".gallery").innerHTML = "";
+    genererWorks(objetsFiltre);
+})
 
