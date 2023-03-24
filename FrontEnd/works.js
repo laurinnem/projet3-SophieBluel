@@ -30,16 +30,13 @@ function genererWorks(works){
 genererWorks(works);
 
 //boutons filtres
-const boutonTous = document.querySelector(".btn-tous");
+const boutonTous = document.querySelector("#btn-tous");
 boutonTous.addEventListener("click", function () {
-    const tousFiltre = works.filter(function () {
-        return works;
-    })
     document.querySelector(".gallery").innerHTML = "";
     genererWorks(works);
 })
 
-const boutonObjets = document.querySelector(".btn-objets");
+const boutonObjets = document.querySelector("#btn-objets");
 boutonObjets.addEventListener("click", function () {
     const objetsFiltre = works.filter(function (works) {
         return works.category.name === "Objets";
@@ -48,7 +45,7 @@ boutonObjets.addEventListener("click", function () {
     genererWorks(objetsFiltre);
 })
 
-const boutonAppartements = document.querySelector(".btn-appartements");
+const boutonAppartements = document.querySelector("#btn-appartements");
 boutonAppartements.addEventListener("click", function () {
     const objetsFiltre = works.filter(function (works) {
         return works.category.name === "Appartements";
@@ -57,7 +54,7 @@ boutonAppartements.addEventListener("click", function () {
     genererWorks(objetsFiltre);
 })
 
-const boutonHotels = document.querySelector(".btn-hotels");
+const boutonHotels = document.querySelector("#btn-hotels");
 boutonHotels.addEventListener("click", function () {
     const objetsFiltre = works.filter(function (works) {
         return works.category.name === "Hotels & restaurants";
@@ -65,4 +62,5 @@ boutonHotels.addEventListener("click", function () {
     document.querySelector(".gallery").innerHTML = "";
     genererWorks(objetsFiltre);
 })
+
 

@@ -4,11 +4,37 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
+    <title>Log In</title>
     <link rel="stylesheet" href="./assets/style.css">
-	<script type= "module" src="login.js"></script>
+	<script src="login.js"></script>
 </head>
 <body>
+    <header>
+        <h1><a id=sophie href="index.html">Sophie Bluel</a><span>Architecte d'intérieur</span></h1>
+        <nav>
+            <ul>
+                <li><a class="nav" href= "index.html#portfolio">projets</a></li>
+			<li><a class="nav" href="index.html#contact">contact</a></li>
+			<li><a class="nav" href="login.html">login</a></li>
+			<li><img src="./assets/icons/instagram.png" alt="Instagram" id="instaLogo"></li>
+            </ul>
+        </nav>
+    </header>
+    <section id="logIn">
+		<h2>Log In</h2>
+        <p id="erreur"></p>
+		<form  >
+			<label for="email">Email</label>
+			<input id="email" type="email" name="email" required>
+			<label for="password">Mot de passe</label>
+            <input id="password" type="password" name="password" required>
+			<button type="button" class="btn" id="btn-seConnecter">Se connecter</button>
+		</form>
+        <a href="" id="passForgotten"><p>Mot de passe oublié</p></a>
+	</section>
     
 </body>
 </html>

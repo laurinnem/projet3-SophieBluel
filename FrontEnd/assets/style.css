@@ -61,7 +61,6 @@ header {
 section {
 	margin: 50px 0
 }
-
 h1{
 	display: flex;
 	flex-direction: column;
@@ -70,15 +69,16 @@ h1{
 	font-weight: 800;
 	color: #B1663C
 }
-
 h1 > span {
 	font-family: 'Work Sans';
 	font-size:10px;
 	letter-spacing: 0.1em;
-;
 }
-
-h2{
+#sophie {
+	color: #B1663C;
+	text-decoration: none;
+}
+h2 {
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 30px;
@@ -88,15 +88,26 @@ nav ul {
 	display: flex;
 	align-items: center;
 	list-style-type: none;
-
+}
+.nav:link {
+	text-decoration: none;
 }
 nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
 }
-
-li:hover {
+.nav {
+	color: black;
+}
+.nav:hover {
 	color: #B1663C;
+}
+.nav:focus {
+	font-weight: ;
+}
+#instaLogo {
+	width: 20px;
+	height: 20px;
 }
 #introduction {
 	display: flex;
@@ -110,7 +121,6 @@ li:hover {
 	margin: auto;
 	width: 80%;
 }
-
 #introduction article {
 	flex: 1
 }
@@ -153,6 +163,9 @@ li:hover {
 	border-radius: 20px 20px 20px 20px;
 	height: 37px;
 }
+.btn:hover {
+	cursor: pointer;
+}
 .btn:focus {
 	color: white;
 	background-color: #1D6154;
@@ -164,7 +177,6 @@ li:hover {
 	grid-column-gap: 20px;
 	grid-row-gap: 20px;
 }
-
 .gallery img {
 	width: 100%;
 }
@@ -174,7 +186,6 @@ li:hover {
 }
 #contact > * {
 	text-align: center;
-
 }
 #contact h2{
 	margin-bottom: 20px;
@@ -185,7 +196,6 @@ li:hover {
 	display: flex;
 	flex-direction: column;
 }
-
 #contact input {
 	height: 50px;
 	font-size: 1.2em;
@@ -199,7 +209,6 @@ li:hover {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-
 input[type="submit"]{
 	font-family: 'Syne';
 	font-weight: 700;
@@ -210,10 +219,50 @@ input[type="submit"]{
 	text-align: center;
 	border-radius: 60px ;
 }
-
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
 	margin: 2em
+}
+/*login*/
+#logIn {
+	width: 50%;
+	margin: auto;
+}
+#logIn > * {
+	text-align: left;
+}
+#logIn h2{
+	margin-bottom: 20px;
+	text-align: center;
+}
+#logIn form {
+	text-align: left;
+	margin-top:30px;
+	display: flex;
+	flex-direction: column;
+}
+#logIn input {
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+#logIn label {
+	margin: 2em 0 1em 0;
+}
+#btn-seConnecter {
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin : 2em auto ;
+	width: 180px;
+	text-align: center;
+	border-radius: 60px ;
+}
+#passForgotten {
+	text-align: center;
+	color: black;
 }
 
