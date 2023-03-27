@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', function (event) {
                 email: email,
                 password: password
             })
-        
         })
 
         .then (function (response){
@@ -34,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
             if (userInfo) {
                 window.sessionStorage.setItem("token", JSON.stringify(userInfo));
                 window.sessionStorage.setItem("token", userInfo.token);
-                window.location.replace("edit.html");
+                window.location.replace("index.html");
             }
             });
     });
