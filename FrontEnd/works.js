@@ -8,7 +8,7 @@ if (works === null){
 }else{
     works = JSON.parse(works);
     console.log(works);
-}
+};
 
 function genererWorks(works){
     for (let i = 0; i < works.length; i++) {
@@ -24,8 +24,8 @@ function genererWorks(works){
         sectionWorks.appendChild(workElement);
         workElement.appendChild(imageElement);
         workElement.appendChild(legendeWork);
-    }
-}
+    };
+};
 
 genererWorks(works);
 

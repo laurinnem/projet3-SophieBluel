@@ -10,15 +10,19 @@
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 	<script type= "module" src="works.js"></script>
+	<script type="module" src="edit.js" defer></script>
 </head>
 <body>
+	<div id="overlay" style="display:none;">
+
+	</div>
 <header>
 	<h1 id="sophie">Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
 		<ul>
 			<li><a class="nav" href= "#portfolio">projets</a></li>
 			<li><a class="nav" href="#contact">contact</a></li>
-			<li><a class="nav" href="login.html">login</a></li>
+			<li><a class="nav" id="btn-loginLogout" href="login.html">login</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram" id="instaLogo"></li>
 		</ul>
 	</nav>
@@ -36,13 +40,47 @@
 		</article>
 	</section>
 	<section id="portfolio">
+		
 		<h2>Mes Projets</h2>
-		<div id="barre-filtres">
+		<div id="edit" style="display:none;">
+			<!--bouton modifier-->
+			<img src="./assets/icons/edit.png" alt="logo modifier" id="editLogo">
+			<a href="#modal1" id="btn-edit">modifier</a>
+		</div>
+		<div id="barre-filtres" style="display:null;">
 			<button class="btn" id="btn-tous">Tous</button>
 			<button class="btn" id="btn-objets">Objets</button>
 			<button class="btn" id="btn-appartements">Appartements</button>
 			<button class="btn" id="btn-hotels">Hôtels & restaurants</button>
 		</div>
+		<!--modale-->
+		
+		<aside id="modalSection" class="modal" style="display:none;">
+			<div class="modal-wrapper">
+				<h3 id="modalTitle">Galerie photo </h3>
+				<div id="modalGallery" class="modalFirst" style="visibility:visible;">
+					<!--gallerieModale-->
+				</div>
+				<div id="modalAjoutPhoto" class="modalSecond" style="display:none;">
+					<img>
+					<button>+ Ajouter photo</button>
+					<p>jpg, png : 4mo max</p>
+				</div>
+				<div id="modalChamps" class="modalSecond" style="display:none;">
+					<label for="title">Titre</label>
+					<input type="text" name="title" id="photoTitle">
+					<label for="categorie">Catégorie</label>
+					<input type="text" name="categorie" id="photoCategorie">
+				</div>
+
+				<hr>
+				<button id="btnModal" class="btn">Ajouter une photo</button><br>
+				<a src="" id="sup" class="modalFirst" style="visibility:visible;">Supprimer la galerie</a>	
+
+			</div>
+		</aside>
+		
+		<!---->
 		<div class="gallery">	
 		</div>
 	</section>
@@ -60,7 +98,6 @@
 		</form>
 	</section>
 </main>
-
 <footer>
 	<nav>
 		<ul>
