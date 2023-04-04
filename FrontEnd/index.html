@@ -47,7 +47,7 @@
 			<img src="./assets/icons/edit.png" alt="logo modifier" id="editLogo">
 			<a href="#modal1" id="btn-edit">modifier</a>
 		</div>
-		<div id="barre-filtres" style="display:null;">
+		<div id="barre-filtres" style="display:flex;">
 			<button class="btn" id="btn-tous">Tous</button>
 			<button class="btn" id="btn-objets">Objets</button>
 			<button class="btn" id="btn-appartements">Appartements</button>
@@ -58,24 +58,25 @@
 		<aside id="modalSection" class="modal" style="display:none;">
 			<div class="modal-wrapper">
 				<h3 id="modalTitle">Galerie photo </h3>
-				<div id="modalGallery" class="modalFirst" style="visibility:visible;">
+				<div id="modalGallery" style="display:grid;">
 					<!--gallerieModale-->
 				</div>
-				<div id="modalAjoutPhoto" class="modalSecond" style="display:none;">
-					<img>
-					<button>+ Ajouter photo</button>
-					<p>jpg, png : 4mo max</p>
+				<div id="modalForm" style="display:none;">
+					<div id="modalAjoutPhoto">
+						<img>
+						<button>+ Ajouter photo</button>
+						<p>jpg, png : 4mo max</p>
+					</div>
+					<div id="modalChamps">
+						<label for="title">Titre</label>
+						<input type="text" name="title" id="photoTitle">
+						<label for="categorie">Catégorie</label>
+						<input type="text" name="categorie" id="photoCategorie">
+					</div>
 				</div>
-				<div id="modalChamps" class="modalSecond" style="display:none;">
-					<label for="title">Titre</label>
-					<input type="text" name="title" id="photoTitle">
-					<label for="categorie">Catégorie</label>
-					<input type="text" name="categorie" id="photoCategorie">
-				</div>
-
 				<hr>
 				<button id="btnModal" class="btn">Ajouter une photo</button><br>
-				<a src="" id="sup" class="modalFirst" style="visibility:visible;">Supprimer la galerie</a>	
+				<a src="" id="sup" style="display:block;">Supprimer la galerie</a>	
 
 			</div>
 		</aside>

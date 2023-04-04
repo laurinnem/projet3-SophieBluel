@@ -136,7 +136,7 @@ nav li {
 	margin-bottom: 1em;
 }
 #barre-filtres {
-	display: flex;
+	/*display:flex; ds html*/
 	flex-flow: row wrap;
 	justify-content: center;
 	gap: 10px;
@@ -268,7 +268,7 @@ footer nav ul {
 
 /*logo + btn modifier*/
 #edit {
-	
+	/*display:none; ds html*/
 
 }
 #editLogo {
@@ -294,6 +294,7 @@ footer nav ul {
 
 } */
 #overlay {
+	/*display:none; ds html*/
 	z-index: 1;
 	position: fixed;
 	
@@ -302,6 +303,7 @@ footer nav ul {
 	background: rgba(0, 0, 0, 0.4);
 }
 #modalSection {
+	/*display:none; ds html*/
 	z-index: 2;
 	position: fixed;
 	display: flex;
@@ -309,36 +311,43 @@ footer nav ul {
 	justify-content: center;
 }
 .modal-wrapper{
+
 	
 	width: 630px;
 	height: 731px;
 	background-color: white;
+	padding:
 
 }
 #modalGallery {
 	width: 100%;
-	display: grid;
+	/* display: grid; ds html*/
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 	grid-column-gap: 10px;
 	grid-row-gap: 10px;
+	
 }
 #modalGallery img {
-	width: 20%;
+	width: 70%;
+}
+#modalForm {
+	/*display:none; ds html*/
 }
 #btnModal {
+	
 	color: white;
 	font-family: "Syne";
 	font-size: 14px;
 	font-weight: 700;
 	text-align: center;
 	background-color: #1D6154;
-	border-color: #1D6154;
-	border-style: solid;
+	border: none;
 	border-radius: 20px 20px 20px 20px;
 	height: 37px;
 	width: 237px ;
 }
 #sup {
+	/*display:block; ds html*/
 	color: red;
 	text-align: center;
 
