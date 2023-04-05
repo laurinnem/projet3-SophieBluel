@@ -68,7 +68,7 @@ genererModalGallery(works);
 btnEdit.addEventListener("click", function(event) {
     event.preventDefault();
     modal.style.display = null;
-    //overlay.style.display = null;
+    overlay.style.display = null;
 });
 
 
