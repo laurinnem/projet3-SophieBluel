@@ -1,15 +1,13 @@
-let works = window.localStorage.getItem("works");
-
-if (works === null){
-    const reponse = await fetch ('http://localhost:5678/api/works');
-    works = await reponse.json();
+//récupération des travaux
+let works = await fetch ('http://localhost:5678/api/works');
+    works = await works.json();
     const reponseWorks = JSON.stringify(works);
-    window.localStorage.setItem("works", reponseWorks);
-}else{
-    works = JSON.parse(works);
-    console.log(works);
-}
+    //window.localStorage.setItem("works", reponseWorks);
 
+    console.log(works);
+    
+
+//génération des travaux sur la gallerie page d'accueil
 function genererWorks(works){
     for (let i = 0; i < works.length; i++) {
         const figure = works[i];
@@ -24,43 +22,49 @@ function genererWorks(works){
         sectionWorks.appendChild(workElement);
         workElement.appendChild(imageElement);
         workElement.appendChild(legendeWork);
-    }
-}
+    };
+};
 
 genererWorks(works);
 
-//boutons filtres
+//récupération des catégories des travaux
+let categories = await fetch ('http://localhost:5678/api/categories');
+    categories = await categories.json();
+    const reponseCategories = JSON.stringify(categories);
+    console.log(categories);
+
+//génération des boutons x filtrer travaux par catégories
+function genererFiltres(categories){
+    for (let i = 0; i<categories.length; i++) {
+        const category = categories[i];
+        const barreFiltres = document.getElementById("barre-filtres");
+        const boutonFiltre = document.createElement("button");
+        boutonFiltre.dataset.id = category.id;
+        const filtreTitle = category.name;
+        boutonFiltre.innerText = filtreTitle
+        boutonFiltre.className = "btn";
+
+        barreFiltres.appendChild(boutonFiltre);
+
+        //e click s bouton filtre
+        boutonFiltre.addEventListener("click", function () {
+            const objetsFiltre = works.filter(function (works) {
+        
+                return works.category.name === filtreTitle;
+            });
+            document.querySelector(".gallery").innerHTML = "";
+            genererWorks(objetsFiltre);
+        });
+    };
+};
+genererFiltres(categories);
+
 const boutonTous = document.querySelector("#btn-tous");
 boutonTous.addEventListener("click", function () {
     document.querySelector(".gallery").innerHTML = "";
     genererWorks(works);
-})
+});
 
-const boutonObjets = document.querySelector("#btn-objets");
-boutonObjets.addEventListener("click", function () {
-    const objetsFiltre = works.filter(function (works) {
-        return works.category.name === "Objets";
-    });
-    document.querySelector(".gallery").innerHTML = "";
-    genererWorks(objetsFiltre);
-})
 
-const boutonAppartements = document.querySelector("#btn-appartements");
-boutonAppartements.addEventListener("click", function () {
-    const objetsFiltre = works.filter(function (works) {
-        return works.category.name === "Appartements";
-    });
-    document.querySelector(".gallery").innerHTML = "";
-    genererWorks(objetsFiltre);
-})
-
-const boutonHotels = document.querySelector("#btn-hotels");
-boutonHotels.addEventListener("click", function () {
-    const objetsFiltre = works.filter(function (works) {
-        return works.category.name === "Hotels & restaurants";
-    });
-    document.querySelector(".gallery").innerHTML = "";
-    genererWorks(objetsFiltre);
-})
 
 
