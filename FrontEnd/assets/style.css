@@ -294,9 +294,11 @@ footer nav ul {
 	/*display:none; ds html*/
 	z-index: 2;
 	position: fixed;
+	width: 100%;
+
 }
 .modal-wrapper {
-	
+	position: relative;
 	margin-left: auto;
 	margin-right: auto;
 	width: 630px;
@@ -326,6 +328,16 @@ footer nav ul {
 }
 #modalGallery img {
 	width: 100%;
+}
+#modalGallery figure {
+	position: relative;
+}
+#modalGallery img.trashIcon {
+	position: absolute;
+	right: 5px;
+	top: 5px;
+	width: 12px;
+	height: 12px;
 }
 #modalAjoutPhoto {
 	display: flex;

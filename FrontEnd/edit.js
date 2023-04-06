@@ -7,17 +7,18 @@ const overlay = document.getElementById("overlay");
 const modalGallery = document.getElementById("modalGallery");
 const modalForm = document.getElementById("modalForm");
 const btnModal = document.getElementById("btnModal");
-const closeModal = modal.style.display = "none";
+const closeModal = function () {
+    modal.style.display = "none";
+    overlay.style.display = "none";
+};
 const deleteGalleryButton = document.getElementById("sup");
 const boutonFormAjoutPhoto = document.getElementById("btn-ajoutPhoto");
 const modalAjoutPhoto = document.getElementById('modalAjoutPhoto');
-
 
 //récupération des catégories des travaux (importer de works.js?)
 let categories = await fetch ('http://localhost:5678/api/categories');
 categories = await categories.json();
 const reponseCategories = JSON.stringify(categories);
-console.log(categories);
 
 
 //display editMode (boutton modifier/logout) et cache filtres
@@ -29,7 +30,7 @@ if (token) {
 
 }else{
     document.getElementById("edit").style.display = "none";
-    document.getElementById("barre-filtres").style.display = null;
+    document.getElementById("barre-filtres").style.display = flex;
     loginLogout.setAttribute("href", "login.html");
     loginLogout.innerText = "Login";
     
@@ -63,17 +64,21 @@ function genererModalGallery(works) {
         workElement.dataset.id = works[i].id;
         const imageElement = document.createElement("img");
         imageElement.src = figure.imageUrl;
+        const trashIcon = document.createElement("img");
+        trashIcon.src = "./assets/icons/trash.png";
+        trashIcon.className = ("trashIcon");
         const editWork = document.createElement("a");
         editWork.innerHTML = "éditer";
         
         modalGallery.appendChild(workElement);
         workElement.appendChild(imageElement);
+        workElement.appendChild(trashIcon);
         workElement.appendChild(editWork);
     };
 };
 genererModalGallery(works);
     
-//e click sur modifier x open modale (changer display)
+//e click sur modifier x open modale 
 btnEdit.addEventListener("click", function(event) {
     event.preventDefault();
     modal.style.display = null;
@@ -85,10 +90,10 @@ btnEdit.addEventListener("click", function(event) {
 const xMarkIcon = document.getElementById("xMarkIcon");
 xMarkIcon.addEventListener("click", function(event) {
     event.preventDefault();
-    closeModal;
+    closeModal();
 });
-//e click en dehors de la modale x fermer modale
 
+//e click en dehors de la modale x fermer modale
 
 //e click sur icône poubelle x delete photo ds  API + DOM (doit s'enlever sans recharger page)
 
@@ -105,14 +110,10 @@ btnModal.addEventListener("click", function(event) {
         btnModal.style.backgroundColor = "#A7A7A7";
 
         
-    
-        //récup liste catégories (fetch) x champs categories + possibilité ajout nouvelle categorie?
-        
-        //ajout liste ds champs 
+        //ajout liste categories ds champs + possibilité ajout nouvelle catégorie?
 
 
-            
-            //e sur bouton "+ Ajout photo" x charger photo nouveau projet 
+        //e sur bouton "+ Ajout photo" x charger photo nouveau projet 
         boutonFormAjoutPhoto.addEventListener("click", function(event) {
             const input = document.createElement("input");
             input.type = "file";
@@ -156,10 +157,12 @@ btnModal.addEventListener("click", function(event) {
     }else if (btnModal.innerText === "valider" && btnModal.style.backgroundColor === "#1D6154") {
         //envoi nouveau projet à API
 
-        closeModal;
+        closeModal();
         //nouveau projet doit s'afficher sans recharger la page (où et comment actualiser DOM?)
     }
 });
+
+//rajouter press enter = click sur bouton modale
 
 
 
