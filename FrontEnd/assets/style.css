@@ -23,6 +23,7 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
+* {box-sizing: border-box;}
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
@@ -139,19 +140,11 @@ nav li {
 	/*display:flex; ds html*/
 	flex-flow: row wrap;
 	justify-content: center;
-	gap: 10px;
+
 	margin-top: 51px;
 	margin-bottom: 51px;
 }
-#btn-tous, #btn-objets {
-	width: 100px;
-}
-#btn-appartements {
-	width: 157px;
-}
-#btn-hotels {
-	width: 198px;
-}
+
 .btn {
 	color: #1D6154;
 	font-family: "Syne";
@@ -162,6 +155,8 @@ nav li {
 	border-style: solid;
 	border-radius: 20px 20px 20px 20px;
 	height: 37px;
+	padding: 0 20px 0 20px;
+	margin: 0 5px 0 5px;
 }
 .btn:hover {
 	cursor: pointer;
@@ -269,7 +264,9 @@ footer nav ul {
 /*logo + btn modifier*/
 #edit {
 	/*display:none; ds html*/
-
+	position: relative;
+	left: 690px;
+	bottom: 55px;
 }
 #editLogo {
 	width: 20px;
@@ -287,26 +284,36 @@ footer nav ul {
 	/*display:none; ds html*/
 	z-index: 1;
 	position: fixed;
-	
-	width: 100vw;
-	height: 100vh;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
 	background: rgba(0, 0, 0, 0.4);
 }
 #modalSection {
 	/*display:none; ds html*/
 	z-index: 2;
 	position: fixed;
-	align-items: center;
-	justify-content: center;
 }
-.modal-wrapper{
-
+.modal-wrapper {
 	
+	margin-left: auto;
+	margin-right: auto;
 	width: 630px;
 	height: 731px;
+	padding: 30px 80px 30px 80px;
+	border-radius: 10px;
 	background-color: white;
-	padding:
-
+}
+#xMarkIcon {
+	position: absolute;
+	right: 2%;
+	top: 2%;
+	width: 12px;
+	height: 12px;
+}
+#xMarkIcon:hover {
+	cursor: pointer;
 }
 #modalGallery {
 	width: 100%;
@@ -314,13 +321,38 @@ footer nav ul {
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 	grid-column-gap: 10px;
 	grid-row-gap: 10px;
+	padding-bottom: 30px;
 	
 }
 #modalGallery img {
-	width: 70%;
+	width: 100%;
+}
+#modalAjoutPhoto {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-evenly;
+	width: 420px;
+	height: 169px;
+	background-color: #E8F1F6;
+}
+#photoIcon {
+	width: 58px;
+	height: 46px;
+
+}
+#btn-ajoutPhoto {
+	color: #306685;
+	border: none;
+	background-color: #CBD6DC;
+}
+.previewPhoto {
+	width: 30%;
+	
 }
 #modalForm {
 	/*display:none; ds html*/
+	
 }
 #btnModal {
 	
@@ -329,6 +361,9 @@ footer nav ul {
 	font-size: 14px;
 	font-weight: 700;
 	text-align: center;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 30px;
 	background-color: #1D6154;
 	border: none;
 	border-radius: 20px 20px 20px 20px;
@@ -337,17 +372,20 @@ footer nav ul {
 }
 #sup {
 	/*display:block; ds html*/
+	position: absolute;
+
+	bottom: 40px;
 	color: red;
-	text-align: center;
 
 }
 h3 {
 	font-family: 'Work Sans';
-font-style: normal;
-font-weight: 400;
-font-size: 26px;
-line-height: 30px;
-text-align: center;
-color: #000000;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 26px;
+	line-height: 30px;
+	text-align: center;
+	color: #000000;
+	padding: 30px 0px 30px 0px;
 }
 
