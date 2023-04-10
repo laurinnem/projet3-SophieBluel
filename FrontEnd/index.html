@@ -1,109 +1,118 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
 	<meta charset="UTF-8">
 	<title>Sophie Bluel - Architecte d'intérieur</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
+		rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
-	<script type= "module" src="works.js"></script>
+	<script type="module" src="works.js"></script>
 	<script type="module" src="edit.js" defer></script>
 </head>
+
 <body>
 	<div id="overlay" style="display:none;">
 
 	</div>
-<header>
-	<h1 id="sophie">Sophie Bluel <span>Architecte d'intérieur</span></h1>
-	<nav>
-		<ul>
-			<li><a class="nav" href= "#portfolio">projets</a></li>
-			<li><a class="nav" href="#contact">contact</a></li>
-			<li><a class="nav" id="btn-loginLogout" href="login.html">login</a></li>
-			<li><img src="./assets/icons/instagram.png" alt="Instagram" id="instaLogo"></li>
-		</ul>
-	</nav>
-</header>
-<main>
-	<section id="introduction">
-		<figure>
-			<img src="./assets/images/sophie-bluel.png" alt="">
-		</figure>
-		<article>
-			<h2>Designer d'espace</h2>
-			<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison finale du chantier.</p>
-			<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
-			<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
-		</article>
-	</section>
-	<section id="portfolio">
-		
-		<h2>Mes Projets</h2>
-		<div id="edit" style="display:none;">
-			<!--bouton modifier-->
-			<img src="./assets/icons/edit.png" alt="logo modifier" id="editLogo">
-			<a href="#modal1" id="btn-edit">modifier</a>
-		</div>
-		<div id="barre-filtres" style="display:flex;">
-			<button class="btn" id="btn-tous">Tous</button>
-			<!--pb id x css, comment le définir en js?-->
-		</div>
+	<header>
+		<h1 id="sophie">Sophie Bluel <span>Architecte d'intérieur</span></h1>
+		<nav>
+			<ul>
+				<li><a class="nav" href="#portfolio">projets</a></li>
+				<li><a class="nav" href="#contact">contact</a></li>
+				<li><a class="nav" id="btn-loginLogout" href="login.html">login</a></li>
+				<li><img src="./assets/icons/instagram.png" alt="Instagram" id="instaLogo"></li>
+			</ul>
+		</nav>
+	</header>
+	<main>
+		<section id="introduction">
+			<figure>
+				<img src="./assets/images/sophie-bluel.png" alt="">
+			</figure>
+			<article>
+				<h2>Designer d'espace</h2>
+				<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison
+					finale du chantier.</p>
+				<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les
+					couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du
+					chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
+				<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG,
+					décorateur(trice)</p>
+			</article>
+		</section>
+		<section id="portfolio">
 
-		<!--modale-->
-		<aside id="modalSection" style="display:none;">
-			<div class="modal-wrapper">
-				<h3 id="modalTitle">Galerie photo </h3>
-				<img src="./assets/icons/Xmark.png" alt="icone fermer modale" id="xMarkIcon">
-				<div id="modalGallery" style="display:grid;">
-					<!--gallerieModale-->
-				</div>
-				<div id="modalForm" style="display:none;">
-					<div id="modalAjoutPhoto">
-						<img src="./assets/icons/photoIcon.png" alt="logo photo" id="photoIcon">
-						<button class="btn" id="btn-ajoutPhoto">+ Ajouter photo</button>
-						<p>jpg, png : 4mo max</p>
-					</div>
-					<div id="modalChamps">
-						<label for="title">Titre</label>
-						<input type="text" name="title" id="photoTitle" required>
-						<label for="categorie">Catégorie</label>
-						<input type="text" name="categorie" id="photoCategorie" required>
-					</div>
-				</div>
-				<hr>
-				<button id="btnModal" class="btn">Ajouter une photo</button><br>
-				<a src="" id="sup" style="display:block;">Supprimer la galerie</a>	
-
+			<h2>Mes Projets</h2>
+			<div id="edit" style="display:none;">
+				<!--bouton modifier-->
+				<img src="./assets/icons/edit.png" alt="logo modifier" id="editLogo">
+				<a href="#modal1" id="btn-edit">modifier</a>
 			</div>
-		</aside>
-		<!---->
+			<div id="barre-filtres" style="display:flex;">
+				<button class="btn" id="btn-tous">Tous</button>
+				<!--pb id x css, comment le définir en js?-->
+			</div>
 
-		<div class="gallery">	
-		</div>
-	</section>
-	<section id="contact">
-		<h2>Contact</h2>
-		<p>Vous avez un projet ? Discutons-en !</p>
-		<form action="#" method="post">
-			<label for="name">Nom</label>
-			<input type="text" name="name" id="name">
-			<label for="email">Email</label>
-			<input type="email" name="email" id="email">
-			<label for="message">Message</label>
-			<textarea name="message" id="message" cols="30" rows="10"></textarea>
-			<input type="submit" value="Envoyer">
-		</form>
-	</section>
-</main>
-<footer>
-	<nav>
-		<ul>
-			<li>Mentions Légales</li>
-		</ul>
-	</nav>
-</footer>
+			<!--modale-->
+			<aside id="modalSection" style="display:none;">
+				<div class="modal-wrapper">
+					<h3 id="modalTitle">Galerie photo </h3>
+					<img src="./assets/icons/Xmark.png" alt="icone fermer modale" id="xMarkIcon">
+					<div id="modalGallery" style="display:grid;">
+						<!--gallerieModale-->
+					</div>
+					<div id="modalForm" style="display:none;">
+						<div id="modalAjoutPhoto">
+							<img src="./assets/icons/photoIcon.png" alt="logo photo" id="photoIcon">
+							<button class="btn" id="btn-ajoutPhoto">+ Ajouter photo</button>
+							<p>jpg, png : 4mo max</p>
+						</div>
+						<div id="modalChamps">
+							<label for="title">Titre</label>
+							<input type="text" name="title" id="photoTitle" required>
+							<label for="categorie">Catégorie</label>
+							<input type="text" list="listeDeroulanteCategories" name="categorie" id="photoCategorie" required>
+							<datalist id="listeDeroulanteCategories"></datalist>
+						</div>
+					</div>
+					<hr>
+					<button id="btnModal" class="btn">Ajouter une photo</button><br>
+					<a src="" id="sup" style="display:block;">Supprimer la galerie</a>
+
+				</div>
+			</aside>
+			<!---->
+
+			<div class="gallery">
+			</div>
+		</section>
+		<section id="contact">
+			<h2>Contact</h2>
+			<p>Vous avez un projet ? Discutons-en !</p>
+			<form action="#" method="post">
+				<label for="name">Nom</label>
+				<input type="text" name="name" id="name">
+				<label for="email">Email</label>
+				<input type="email" name="email" id="email">
+				<label for="message">Message</label>
+				<textarea name="message" id="message" cols="30" rows="10"></textarea>
+				<input type="submit" value="Envoyer">
+			</form>
+		</section>
+	</main>
+	<footer>
+		<nav>
+			<ul>
+				<li>Mentions Légales</li>
+			</ul>
+		</nav>
+	</footer>
 </body>
+
 </html>

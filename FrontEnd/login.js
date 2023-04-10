@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
         event.preventDefault();
         const email = document.querySelector("[name=email]").value;
         const password = document.querySelector("[name=password]").value;
-        
+
         let response = fetch("http://localhost:5678/api/users/login", {
             method: 'POST',
             headers: {
@@ -18,25 +18,22 @@ document.addEventListener('DOMContentLoaded', function (event) {
             })
         })
 
-        .then (function (response){
-            console.log(response);
-            if (response.status === 200) {
-                return response.json();
-            }else{
-                alert("Erreur dans l'identifiant ou le mot de passe");
-                return Promise.reject();
-            }
-        })
+            .then(function (response) {
+                if (response.status === 200) {
+                    return response.json();
+                } else {
+                    alert("Erreur dans l'identifiant ou le mot de passe");
+                }
+            })
 
-        .then (function (userInfo) {
-            console.log(userInfo);
-            if (userInfo) {
-                window.sessionStorage.setItem("token", JSON.stringify(userInfo));
-                window.sessionStorage.setItem("token", userInfo.token);
-                window.location.replace("index.html");
-            }
+            .then(function (userInfo) {
+                if (userInfo) {
+                    window.sessionStorage.setItem("token", JSON.stringify(userInfo));
+                    window.sessionStorage.setItem("token", userInfo.token);
+                    window.location.replace("index.html");
+                }
             });
     });
-    });
+});
 
 
