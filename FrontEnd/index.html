@@ -74,10 +74,14 @@
 							<p>jpg, png : 4mo max</p>
 						</div>
 						<div id="modalChamps">
-							<label for="title">Titre</label>
-							<input type="text" name="title" id="photoTitle" required>
-							<label for="categorie">Catégorie</label>
-							<input type="text" list="listeDeroulanteCategories" name="categorie" id="photoCategorie" required>
+							<input type="file" accept="image/jpg, image/png, image/jPEG" id="uploadImage"
+								class="formInput" style="display:none;" required>
+							<label for="title">Titre</label><br>
+							<input type="text" name="title" id="photoTitle" class="formInput" required>
+							<br>
+							<label for="categorie">Catégorie</label><br>
+							<input type="text" list="listeDeroulanteCategories" name="categorie" id="photoCategorie"
+								class="formInput" required>
 							<datalist id="listeDeroulanteCategories"></datalist>
 						</div>
 					</div>
