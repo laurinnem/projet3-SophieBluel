@@ -6,7 +6,7 @@ const btnEdit = document.getElementById("btn-edit");
 const modal = document.getElementById("modalSection");
 const overlay = document.getElementById("overlay");
 const modalGallery = document.getElementById("modalGallery");
-
+const arrow = document.getElementById("arrowPrevious");
 const modalForm = document.getElementById("modalForm");
 const btnModal = document.getElementById("btnModal");
 const deleteGalleryButton = document.getElementById("sup");
@@ -22,16 +22,16 @@ const closeModal = function () {
     overlay.style.display = "none";
     modalGallery.style.display = "grid";
     modalForm.style.display = "none";
+    arrow.style.display = "none";
     deleteGalleryButton.style.display = null;
     btnModal.innerText = "Ajouter une photo";
     btnModal.style.backgroundColor = "#1D6154";
 };
 
-//récupération des catégories des travaux (importer de works.js?)
+//récupération des catégories des travaux
 let categories = await fetch('http://localhost:5678/api/categories');
 categories = await categories.json();
 const reponseCategories = JSON.stringify(categories);
-console.log(categories);
 
 //création menu déroullant avec liste des catégories
 function genererListeCategories(categories) {
@@ -87,6 +87,10 @@ function genererModalGallery(works) {
         workElement.dataset.id = works[i].id;
         const imageElement = document.createElement("img");
         imageElement.src = figure.imageUrl;
+        imageElement.className = ("photoWork");
+        const maximiseIcon = document.createElement("img");
+        maximiseIcon.src = "./assets/icons/maximise.png";
+        maximiseIcon.className = ("maximiseIcon");
         const trashIcon = document.createElement("img");
         trashIcon.src = "./assets/icons/trash.png";
         trashIcon.className = ("trashIcon");
@@ -96,6 +100,7 @@ function genererModalGallery(works) {
         modalGallery.appendChild(workElement);
         workElement.appendChild(imageElement);
         workElement.appendChild(trashIcon);
+        workElement.appendChild(maximiseIcon);
         workElement.appendChild(editWork);
     };
 };
@@ -117,6 +122,14 @@ xMarkIcon.addEventListener("click", function (event) {
 
 //e click en dehors de la modale x fermer modale
 overlay.addEventListener("click", closeModal);
+
+//e mouseover sur photo pour montrer maximiseIcon
+const photos = document.querySelectorAll(".photoWork");
+photos.forEach((photo) => {
+    photo.addEventListener("mouseover", () => {
+        photo.nextSibling.style.display = null;
+    });
+});
 
 //e click sur icône poubelle x delete photo ds  API + DOM (doit s'enlever sans recharger page)
 const trashIcons = document.querySelectorAll(".trashIcon");
@@ -143,25 +156,24 @@ trashIcons.forEach((trashIcon) => {
     });
 });
 
-
-
 //e click sur bouton modale x changer config 
 btnModal.addEventListener("click", function (event) {
+    console.log(btnModal.innerText === "Valider", btnModal.style.backgroundColor);
+    console.log(btnModal.innerText);
     event.preventDefault();
     if (btnModal.innerText === "Ajouter une photo") {
-        console.log(btnModal.innerText);
         modalGallery.style.display = "none";
         modalForm.style.display = null;
+        arrow.style.display = null;
+        document.getElementById("modalTitle").innerText = "Ajout photo";
         deleteGalleryButton.style.display = "none";
         btnModal.innerText = "Valider";
         btnModal.style.backgroundColor = "#A7A7A7";
 
         //e sur bouton "+ Ajout photo" x charger photo nouveau projet 
         boutonFormAjoutPhoto.addEventListener("click", function (event) {
-            console.log("hello");
+            event.preventDefault();
             input.click();
-            console.log(btnModal.innerText);
-
             /* vérifie taille et type de fichier */
             input.addEventListener("change", async function () {
                 const image = input.files[0];
@@ -189,15 +201,12 @@ btnModal.addEventListener("click", function (event) {
             });
         });
 
-        //si tt les champs remplis: changer btnModal à "#1D6154"
         console.log(document.getElementById("uploadImage"));
-
+        //si tt les champs remplis: changer btnModal à "#1D6154"
         document.querySelectorAll('.formInput').forEach(input => {
             input.addEventListener('change', event => {
                 if (document.getElementById("uploadImage").value.length != 0 && inputTitle.value != "" && inputCategorie.value != "") {
-
                     btnModal.style.backgroundColor = "#1D6154";
-                    console.log(btnModal.innerText);
                 } else {
                     btnModal.style.backgroundColor = "#A7A7A7";
                 }
@@ -209,22 +218,24 @@ btnModal.addEventListener("click", function (event) {
         console.log("elseif pas ok");
         alert("veuillez remplir tout les champs");
 
-    } else if (btnModal.innerText === "Valider" && btnModal.style.backgroundColor === "#1D6154") {
+    } else if (btnModal.innerText === "Valider" && btnModal.style.backgroundColor === 'rgb(29, 97, 84)') {
         console.log("elseif tout ok");
         const image = input.files[0];
-        const formData = new formData();
-        formData.append("title", title);
-        formData.append("category", categorie);
-        formData.append("image", image);
-
+        const formd = new FormData();
+        formd.append("title", inputTitle.value);
+        formd.append("category", inputCategorie.value);
+        formd.append("image", image.value);
+        console.log(formd.get("title"));
+        console.log(inputTitle.value);
         //envoi nouveau projet à API
         fetch("http://localhost:5678/api/works", {
             method: "POST",
             headers: {
                 "accept": "application/json",
+                "Content-Type": "multipart/form-data",
                 "Authorization": "Bearer " + token
             },
-            body: formData
+            body: formd
         })
 
             .then(function (response) {
@@ -246,6 +257,24 @@ btnModal.addEventListener("click", function (event) {
 
 });
 
+//fonction x reset champs ajout photo
+function clearInput() {
+    inputTitle.value = "";
+};
+
+//e click sur la flèche x revenir à 1ere config de la modale
+arrow.addEventListener("click", function (event) {
+    event.preventDefault();
+    modalGallery.style.display = "grid";
+    modalForm.style.display = "none";
+    arrow.style.display = "none";
+    document.getElementById("modalTitle").innerText = "Galerie photo";
+    deleteGalleryButton.style.display = null;
+    btnModal.innerText = "Ajouter une photo";
+    btnModal.style.backgroundColor = "#1D6154";
+    clearInput;
+    //rajouter fction qui delete les champs du formulaire si ils sont remplis
+});
 
     // //rajouter press enter = click sur bouton modale
     // window.addEventListener('keydown', function (event){

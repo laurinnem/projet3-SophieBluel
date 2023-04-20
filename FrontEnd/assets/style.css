@@ -396,8 +396,9 @@ label {
 /*logo + btn modifier*/
 #edit {
 	/*display:none; ds html*/
+
 	position: relative;
-	left: 690px;
+	left: 62%;
 	bottom: 55px;
 }
 
@@ -407,8 +408,6 @@ label {
 }
 
 #btn-edit {
-
-	display: inline-block;
 	font-family: 'Work Sans';
 	font-weight: 400;
 	font-size: 14px;
@@ -448,12 +447,25 @@ label {
 	background-color: white;
 }
 
+#arrowPrevious {
+	/* display: none; ds html*/
+	position: absolute;
+	left: 30px;
+	top: 30px;
+	width: 21px;
+	height: 15px;
+}
+
+#arrowPrevious:hover {
+	cursor: pointer;
+}
+
 #xMarkIcon {
 	position: absolute;
-	right: 2%;
-	top: 2%;
-	width: 12px;
-	height: 12px;
+	right: 30px;
+	top: 30px;
+	width: 14px;
+	height: 14px;
 }
 
 #xMarkIcon:hover {
@@ -467,7 +479,6 @@ label {
 	grid-column-gap: 10px;
 	grid-row-gap: 10px;
 	padding-bottom: 30px;
-
 }
 
 #modalGallery img {
@@ -478,12 +489,28 @@ label {
 	position: relative;
 }
 
+#modalGallery img.maximiseIcon {
+	display: none;
+	position: absolute;
+	right: 30px;
+	top: 5px;
+	width: 20px;
+	height: 20px;
+	border-radius: 3px;
+}
+
+#modalGallery img.maximiseIcon:hover {
+	cursor: pointer;
+}
+
 #modalGallery img.trashIcon {
 	position: absolute;
 	right: 5px;
 	top: 5px;
-	width: 12px;
-	height: 12px;
+	width: 20px;
+	height: 20px;
+	border-radius: 3px;
+
 }
 
 #modalGallery img.trashIcon:hover {
@@ -495,8 +522,9 @@ label {
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-evenly;
-	width: 420px;
+	width: 100%;
 	height: 169px;
+	margin: 5px 0 40px 0;
 	background-color: #E8F1F6;
 }
 
@@ -513,13 +541,18 @@ label {
 }
 
 .previewPhoto {
-	width: 30%;
+	height: 100%;
 
 }
 
 #modalForm {
 	/*display:none; ds html*/
+}
 
+#modalChamps input {
+	width: 100%;
+	margin-top: 10px;
+	margin-bottom: 35px;
 }
 
 hr {

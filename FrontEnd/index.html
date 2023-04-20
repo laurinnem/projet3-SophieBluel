@@ -64,6 +64,8 @@
 				<div class="modal-wrapper">
 					<h3 id="modalTitle">Galerie photo </h3>
 					<img src="./assets/icons/Xmark.png" alt="icone fermer modale" id="xMarkIcon">
+					<img src="./assets/icons/arrow.png" alt="flèche retour galerie" id="arrowPrevious"
+						style="display:none;">
 					<div id="modalGallery" style="display:grid;">
 						<!--gallerieModale-->
 					</div>
@@ -73,7 +75,7 @@
 							<button class="btn" id="btn-ajoutPhoto">+ Ajouter photo</button>
 							<p>jpg, png : 4mo max</p>
 						</div>
-						<div id="modalChamps">
+						<form id="modalChamps">
 							<input type="file" accept="image/jpg, image/png, image/jPEG" id="uploadImage"
 								class="formInput" style="display:none;" required>
 							<label for="title">Titre</label><br>
@@ -83,7 +85,7 @@
 							<input type="text" list="listeDeroulanteCategories" name="categorie" id="photoCategorie"
 								class="formInput" required>
 							<datalist id="listeDeroulanteCategories"></datalist>
-						</div>
+						</form>
 					</div>
 					<hr>
 					<button id="btnModal" class="btn">Ajouter une photo</button><br>
