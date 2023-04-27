@@ -1,7 +1,6 @@
 //récupération des travaux
 let works = await fetch('http://localhost:5678/api/works');
 works = await works.json();
-const reponseWorks = JSON.stringify(works);
 
 //génération des travaux sur la gallerie page d'accueil
 export function genererWorks(works) {
@@ -20,6 +19,7 @@ export function genererWorks(works) {
         workElement.appendChild(legendeWork);
     };
 };
+
 genererWorks(works);
 
 //récupération des catégories des travaux

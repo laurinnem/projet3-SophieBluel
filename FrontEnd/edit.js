@@ -16,6 +16,8 @@ const inputTitle = document.getElementById('photoTitle');
 const inputCategorie = document.getElementById('photoCategorie');
 const input = document.getElementById("uploadImage");
 
+console.log(token);
+
 //ferme la modale et reset les propriétés pour réouverture
 const closeModal = function () {
     modal.style.display = "none";
@@ -26,22 +28,24 @@ const closeModal = function () {
     deleteGalleryButton.style.display = null;
     btnModal.innerText = "Ajouter une photo";
     btnModal.style.backgroundColor = "#1D6154";
+    document.getElementById('modalChamps').reset();
 };
 
 //récupération des catégories des travaux
 let categories = await fetch('http://localhost:5678/api/categories');
 categories = await categories.json();
-const reponseCategories = JSON.stringify(categories);
 
 //création menu déroullant avec liste des catégories
 function genererListeCategories(categories) {
     for (let i = 0; i < categories.length; i++) {
         const elementListeCategorie = document.createElement('option');
         elementListeCategorie.value = categories[i].name;
-
+        elementListeCategorie.setAttribute('data-value', categories[i].id)
         const listeAllCategories = document.getElementById('listeDeroulanteCategories');
         listeAllCategories.appendChild(elementListeCategorie);
+
     };
+    console.log(categories);
 };
 genererListeCategories(categories);
 
@@ -78,7 +82,6 @@ loginLogout.addEventListener("click", function (event) {
 //création éléments de la gallerie en récupérant images de l'API
 let works = await fetch('http://localhost:5678/api/works');
 works = await works.json();
-const reponseWorks = JSON.stringify(works);
 
 function genererModalGallery(works) {
     for (let i = 0; i < works.length; i++) {
@@ -126,8 +129,15 @@ overlay.addEventListener("click", closeModal);
 //e mouseover sur photo pour montrer maximiseIcon
 const photos = document.querySelectorAll(".photoWork");
 photos.forEach((photo) => {
-    photo.addEventListener("mouseover", () => {
-        photo.nextSibling.style.display = null;
+    const trash = photo.nextSibling;
+    const maximise = trash.nextSibling;
+    photo.addEventListener("mouseover", function (event) {
+        event.preventDefault();
+        maximise.style.display = "block";
+    });
+    photo.addEventListener("mouseout", function (event) {
+        event.preventDefault();
+        maximise.style.display = "none";
     });
 });
 
@@ -151,6 +161,7 @@ trashIcons.forEach((trashIcon) => {
                     sectionWorks.innerHTML = "";
                     genererModalGallery(works);
                     genererWorks(works);
+                    //btnEdit.click();
                 };
             });
     });
@@ -158,8 +169,6 @@ trashIcons.forEach((trashIcon) => {
 
 //e click sur bouton modale x changer config 
 btnModal.addEventListener("click", function (event) {
-    console.log(btnModal.innerText === "Valider", btnModal.style.backgroundColor);
-    console.log(btnModal.innerText);
     event.preventDefault();
     if (btnModal.innerText === "Ajouter une photo") {
         modalGallery.style.display = "none";
@@ -177,7 +186,6 @@ btnModal.addEventListener("click", function (event) {
             /* vérifie taille et type de fichier */
             input.addEventListener("change", async function () {
                 const image = input.files[0];
-                console.log(image);
                 if (image.type !== "image/jpg" && image.type !== "image/png" && image.type !== "image/jpeg") {
                     alert("jpg ou png obligatoire");
                     return;
@@ -201,7 +209,6 @@ btnModal.addEventListener("click", function (event) {
             });
         });
 
-        console.log(document.getElementById("uploadImage"));
         //si tt les champs remplis: changer btnModal à "#1D6154"
         document.querySelectorAll('.formInput').forEach(input => {
             input.addEventListener('change', event => {
@@ -213,67 +220,68 @@ btnModal.addEventListener("click", function (event) {
             });
         });
 
-        console.log(btnModal.innerText);
-    } else if (btnModal.innerText === "Valider" && btnModal.style.backgroundColor === "#A7A7A7") {
-        console.log("elseif pas ok");
+    } else if (btnModal.innerText === "Valider" && btnModal.style.backgroundColor === "rgb(167, 167, 167)") {
         alert("veuillez remplir tout les champs");
 
-    } else if (btnModal.innerText === "Valider" && btnModal.style.backgroundColor === 'rgb(29, 97, 84)') {
-        console.log("elseif tout ok");
+    } else if (btnModal.innerText === "Valider" && btnModal.style.backgroundColor === "rgb(29, 97, 84)") {
         const image = input.files[0];
-        const formd = new FormData();
-        formd.append("title", inputTitle.value);
-        formd.append("category", inputCategorie.value);
-        formd.append("image", image.value);
-        console.log(formd.get("title"));
-        console.log(inputTitle.value);
+        const formContent = new FormData();
+        formContent.append("title", inputTitle.value);
+        formContent.append("category", inputCategorie.options);
+        formContent.append("image", image);
+
+        console.log(token);
+        console.log(formContent);
         //envoi nouveau projet à API
         fetch("http://localhost:5678/api/works", {
             method: "POST",
             headers: {
                 "accept": "application/json",
-                "Content-Type": "multipart/form-data",
                 "Authorization": "Bearer " + token
             },
-            body: formd
+            body: formContent
         })
 
-            .then(function (response) {
-                if (response.status === 201) {
-                    return response.json();
-                }
-            })
-
             //afficher nouveau projet dans galeries
-            .then(function (data) {
-                console.log(data);
-                modalGallery.innerHTML = "";
-                sectionWorks.innerHTML = "";
-                genererModalGallery(works);
-                genererWorks(works);
-                closeModal();
+            .then(function (response) {
+                console.log(response);
+                if (response.ok === true) {
+                    //fetch('http://localhost:5678/api/works');
+
+                };
+            })
+            .then(function (response) {
+                works = response.json();
+                console.log(works);
+                return works;
+
+                //modalGallery.innerHTML = "";
+                //sectionWorks.innerHTML = "";
+                //genererModalGallery(works);
+                //genererWorks(works);
             });
     };
 
 });
 
-//fonction x reset champs ajout photo
-function clearInput() {
-    inputTitle.value = "";
-};
 
 //e click sur la flèche x revenir à 1ere config de la modale
 arrow.addEventListener("click", function (event) {
     event.preventDefault();
-    modalGallery.style.display = "grid";
-    modalForm.style.display = "none";
-    arrow.style.display = "none";
-    document.getElementById("modalTitle").innerText = "Galerie photo";
-    deleteGalleryButton.style.display = null;
-    btnModal.innerText = "Ajouter une photo";
-    btnModal.style.backgroundColor = "#1D6154";
-    clearInput;
-    //rajouter fction qui delete les champs du formulaire si ils sont remplis
+    closeModal();
+    modal.style.display = null;
+    overlay.style.display = null;
+
+    // modalGallery.style.display = "grid";
+    // modalForm.style.display = "none";
+    // arrow.style.display = "none";
+    // document.getElementById("modalTitle").innerText = "Galerie photo";
+    // deleteGalleryButton.style.display = null;
+    // btnModal.innerText = "Ajouter une photo";
+    // btnModal.style.backgroundColor = "#1D6154";
+    // clearInput;
+
+
 });
 
     // //rajouter press enter = click sur bouton modale
