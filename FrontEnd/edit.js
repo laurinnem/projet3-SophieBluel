@@ -1,4 +1,3 @@
-import { genererWorks } from './works.js';
 const sectionWorks = document.querySelector(".gallery");
 const token = window.sessionStorage.getItem("token");
 const loginLogout = document.getElementById("btn-loginLogout");
@@ -125,7 +124,7 @@ photos.forEach((photo) => {
 //e click sur icône poubelle x delete photo ds  API + DOM (doit s'enlever sans recharger page)
 const trashIcons = document.querySelectorAll(".trashIcon");
 trashIcons.forEach((trashIcon) => {
-    trashIcon.addEventListener("click", () => {
+    trashIcon.addEventListener("click", (event) => {
         const figure = trashIcon.parentNode;
         let id = figure.getAttribute("data-id");
         fetch("http://localhost:5678/api/works/" + id, {
@@ -135,6 +134,18 @@ trashIcons.forEach((trashIcon) => {
                 "Authorization": "Bearer " + token
             },
         })
+
+            // .then(function (response) {
+
+            //     console.log(response);
+            //     setTimeout(() => console.log(response, 50000));
+            //     return response;
+            // })
+            // .catch(function (error) {
+            //     console.log(error)
+            //     setTimeout(() => console.log(error, 50000));
+            //     return;
+            // });
             .then(function (response) {
                 if (response.status === 204) {
                     console.log(response);
@@ -146,7 +157,7 @@ trashIcons.forEach((trashIcon) => {
                     // genererModalGallery(works);
                     // genererWorks(works);
 
-                    //btnEditClick();
+                    btnEditClick();
 
                 };
             });
@@ -154,7 +165,7 @@ trashIcons.forEach((trashIcon) => {
 });
 
 //formulaire pour ajouter photo
-const formAjoutPhoto = document.createElement("form");
+const formAjoutPhoto = document.createElement("div");
 formAjoutPhoto.setAttribute("id", "modalAjoutPhoto");
 //générer contenu formulaire pour ajouter photo
 function genererModalAjoutPhotoContent() {
@@ -163,9 +174,14 @@ function genererModalAjoutPhotoContent() {
     iconePhoto.setAttribute("alt", "logo photo");
     iconePhoto.src = "./assets/icons/photoIcon.png";
     const boutonAjoutPhoto = document.createElement("button");
+    boutonAjoutPhoto.type = "button";
+
     boutonAjoutPhoto.className = ("btn");
     boutonAjoutPhoto.setAttribute("id", "btn-ajoutPhoto");
     boutonAjoutPhoto.innerText = "+ Ajouter photo";
+    console.log("ok");
+
+
     const typeFile = document.createElement("p");
     typeFile.innerText = "jpg, png : 4mo max";
 
@@ -173,18 +189,24 @@ function genererModalAjoutPhotoContent() {
     formAjoutPhoto.appendChild(iconePhoto);
     formAjoutPhoto.appendChild(boutonAjoutPhoto);
     formAjoutPhoto.appendChild(typeFile);
+    console.log(boutonAjoutPhoto);
+    boutonAjoutPhoto.onclick = function () {
+        inputClick();
+        submitForm();
+    };
+
 
 };
 genererModalAjoutPhotoContent();
 const modalAjoutPhoto = document.getElementById('modalAjoutPhoto');
 const boutonFormAjoutPhoto = document.getElementById("btn-ajoutPhoto");
 
+
 //ferme la modale et reset les propriétés pour réouverture
 const closeModal = function () {
     modal.style.display = "none";
     overlay.style.display = "none";
     modalGallery.style.display = "grid";
-    //boutonFormAjoutPhoto.click.remove;
     document.getElementById('modalChamps').reset();
     //document.getElementById('modalAjoutPhoto').reset();
     modalAjoutPhoto.innerHTML = "";
@@ -207,13 +229,8 @@ xMarkIcon.addEventListener("click", function (event) {
 //e click en dehors de la modale x fermer modale
 overlay.addEventListener("click", closeModal);
 
-console.log(boutonFormAjoutPhoto);
-console.log(modalAjoutPhoto);
-//e sur bouton "+ Ajout photo" x charger photo nouveau projet 
-boutonFormAjoutPhoto.addEventListener("click", function (event) {
-    event.preventDefault();
-    //input.click();
-    inputClick();
+function submitForm() {
+    //event.preventDefault();
     /* vérifie taille et type de fichier */
     input.addEventListener("change", async function () {
         const image = input.files[0];
@@ -248,8 +265,7 @@ boutonFormAjoutPhoto.addEventListener("click", function (event) {
             }
         });
     });
-});
-
+};
 
 
 //e click sur bouton modale x changer config 
@@ -263,48 +279,6 @@ btnModal.addEventListener("click", function (event) {
         deleteGalleryButton.style.display = "none";
         btnModal.innerText = "Valider";
         btnModal.style.backgroundColor = "#A7A7A7";
-
-        // //e sur bouton "+ Ajout photo" x charger photo nouveau projet 
-        // boutonFormAjoutPhoto.addEventListener("click", function (event) {
-        //     event.preventDefault();
-        //     //input.click();
-        //     inputClick();
-        //     /* vérifie taille et type de fichier */
-        //     input.addEventListener("change", async function () {
-        //         const image = input.files[0];
-        //         if (image.type !== "image/jpg" && image.type !== "image/png" && image.type !== "image/jpeg") {
-        //             alert("jpg ou png obligatoire");
-        //             return;
-        //         }
-        //         if (image.size > 4 * 1024 * 1024) {
-        //             alert("La taille maximum du fichier est de 4mo");
-        //             return;
-        //         }
-        //         /* affichage ds modale de la nouvelle photo, à la place du contenu de div#modalAjoutPhoto */
-        //         modalAjoutPhoto.innerHTML = "";
-        //         const reader = new FileReader();
-        //         reader.readAsDataURL(image);
-        //         reader.onload = function () {
-        //             image.src = reader.result;
-        //             const newImage = document.createElement("img");
-        //             newImage.className = "previewPhoto";
-        //             newImage.src = image.src;
-        //             modalAjoutPhoto.appendChild(newImage);
-
-        //         };
-        //     });
-        // });
-
-        // //si tt les champs remplis: changer btnModal à "#1D6154"
-        // document.querySelectorAll('.formInput').forEach(input => {
-        //     input.addEventListener('change', event => {
-        //         if (document.getElementById("uploadImage").value.length != 0 && inputTitle.value != "" && inputCategorie.value != "") {
-        //             btnModal.style.backgroundColor = "#1D6154";
-        //         } else {
-        //             btnModal.style.backgroundColor = "#A7A7A7";
-        //         }
-        //     });
-        // });
 
     } else if (btnModal.innerText === "Valider" && btnModal.style.backgroundColor === "rgb(167, 167, 167)") {
         alert("veuillez remplir tout les champs");
@@ -347,7 +321,6 @@ arrow.addEventListener("click", function (event) {
     // deleteGalleryButton.style.display = null;
     // btnModal.innerText = "Ajouter une photo";
     // btnModal.style.backgroundColor = "#1D6154";
-    // clearInput;
 
 
 });

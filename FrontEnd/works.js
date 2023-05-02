@@ -3,7 +3,7 @@ let works = await fetch('http://localhost:5678/api/works');
 works = await works.json();
 
 //génération des travaux sur la gallerie page d'accueil
-export function genererWorks(works) {
+function genererWorks(works) {
     for (let i = 0; i < works.length; i++) {
         const figure = works[i];
         const sectionWorks = document.querySelector(".gallery");
