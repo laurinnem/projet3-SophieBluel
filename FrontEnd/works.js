@@ -43,7 +43,6 @@ function genererFiltres(categories) {
         //e click s bouton filtre
         boutonFiltre.addEventListener("click", function () {
             const objetsFiltre = works.filter(function (works) {
-
                 return works.category.name === filtreTitle;
             });
             document.querySelector(".gallery").innerHTML = "";

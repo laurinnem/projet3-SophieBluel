@@ -56,7 +56,7 @@
 			</div>
 			<div id="barre-filtres" style="display:flex;">
 				<button class="btn" id="btn-tous">Tous</button>
-				<!--pb id x css, comment le définir en js?-->
+				<!--autres boutons filtres générés ds works.js-->
 			</div>
 
 			<!--modale-->
@@ -67,14 +67,10 @@
 					<img src="./assets/icons/arrow.png" alt="flèche retour galerie" id="arrowPrevious"
 						style="display:none;">
 					<div id="modalGallery" style="display:grid;">
-						<!--gallerieModale-->
+						<!--gallerie de la modale générée ds edit.js-->
 					</div>
 					<div id="modalForm" style="display:none;">
-						<!-- <div id="modalAjoutPhoto">
-							<img src="./assets/icons/photoIcon.png" alt="logo photo" id="photoIcon">
-							<button class="btn" id="btn-ajoutPhoto">+ Ajouter photo</button>
-							<p>jpg, png : 4mo max</p>
-						</div> -->
+						<!-- div #modalAjoutPhoto générée ds edit.js (avec bouton ajout photo / aperçu photo)-->
 						<form id="modalChamps">
 							<input type="file" accept="image/jpg, image/png, image/jPEG" id="uploadImage"
 								class="formInput" style="display:none;" required>
@@ -83,7 +79,7 @@
 							<br>
 							<label for="categorie">Catégorie</label><br>
 							<input type="text" list="listeDeroulanteCategories" name="categorie" id="photoCategorie"
-								class="formInput" required>
+								class="formInput" autocomplete="off" required>
 							<datalist id="listeDeroulanteCategories"></datalist>
 						</form>
 					</div>
@@ -93,9 +89,10 @@
 
 				</div>
 			</aside>
-			<!---->
+
 
 			<div class="gallery">
+				<!--générée dans works.js-->
 			</div>
 		</section>
 		<section id="contact">

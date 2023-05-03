@@ -12,9 +12,11 @@ const deleteGalleryButton = document.getElementById("sup");
 const inputTitle = document.getElementById('photoTitle');
 const inputCategorie = document.getElementById('photoCategorie');
 const input = document.getElementById("uploadImage");
+
 function btnEditClick() {
     btnEdit.click();
-}
+};
+
 function inputClick() {
     input.click();
 };
@@ -31,25 +33,21 @@ function genererListeCategories(categories) {
         elementListeCategorie.setAttribute('data-value', categories[i].id)
         const listeAllCategories = document.getElementById('listeDeroulanteCategories');
         listeAllCategories.appendChild(elementListeCategorie);
-
     };
-    console.log(categories);
 };
 genererListeCategories(categories);
 
-//display editMode (boutton modifier/logout) et cache filtres
+//display editMode (boutton modifier/logout) et cache les filtres
 if (token) {
     document.getElementById("edit").style.display = null;
     document.getElementById("barre-filtres").style.display = "none";
     loginLogout.setAttribute("href", "index.html");
     loginLogout.innerText = "Logout";
-
 } else {
     document.getElementById("edit").style.display = "none";
     document.getElementById("barre-filtres").style.display = "flex";
     loginLogout.setAttribute("href", "login.html");
     loginLogout.innerText = "Login";
-
 };
 
 //fonction x e click sur "logout" (remove token de sessionStorage)
@@ -66,11 +64,10 @@ loginLogout.addEventListener("click", function (event) {
     }
 });
 
-
-//création éléments de la gallerie en récupérant images de l'API
+//récupération images de l'API
 let works = await fetch('http://localhost:5678/api/works');
 works = await works.json();
-
+//création éléments de la gallerie ds modale
 function genererModalGallery(works) {
     for (let i = 0; i < works.length; i++) {
         const figure = works[i];
@@ -97,8 +94,6 @@ function genererModalGallery(works) {
 };
 genererModalGallery(works);
 
-
-
 //e click sur modifier x open modale 
 btnEdit.addEventListener("click", function (event) {
     event.preventDefault();
@@ -121,7 +116,7 @@ photos.forEach((photo) => {
     });
 });
 
-//e click sur icône poubelle x delete photo ds  API + DOM (doit s'enlever sans recharger page)
+//e click sur icône poubelle x delete photo ds  API + DOM 
 const trashIcons = document.querySelectorAll(".trashIcon");
 trashIcons.forEach((trashIcon) => {
     trashIcon.addEventListener("click", (event) => {
@@ -135,30 +130,10 @@ trashIcons.forEach((trashIcon) => {
             },
         })
 
-            // .then(function (response) {
-
-            //     console.log(response);
-            //     setTimeout(() => console.log(response, 50000));
-            //     return response;
-            // })
-            // .catch(function (error) {
-            //     console.log(error)
-            //     setTimeout(() => console.log(error, 50000));
-            //     return;
-            // });
             .then(function (response) {
                 if (response.status === 204) {
-                    console.log(response);
-                    console.log(figure);
-
                     figure.remove();
-                    // modalGallery.innerHTML = "";
-                    // sectionWorks.innerHTML = "";
-                    // genererModalGallery(works);
-                    // genererWorks(works);
-
                     btnEditClick();
-
                 };
             });
     });
@@ -175,13 +150,9 @@ function genererModalAjoutPhotoContent() {
     iconePhoto.src = "./assets/icons/photoIcon.png";
     const boutonAjoutPhoto = document.createElement("button");
     boutonAjoutPhoto.type = "button";
-
     boutonAjoutPhoto.className = ("btn");
     boutonAjoutPhoto.setAttribute("id", "btn-ajoutPhoto");
     boutonAjoutPhoto.innerText = "+ Ajouter photo";
-    console.log("ok");
-
-
     const typeFile = document.createElement("p");
     typeFile.innerText = "jpg, png : 4mo max";
 
@@ -201,14 +172,12 @@ genererModalAjoutPhotoContent();
 const modalAjoutPhoto = document.getElementById('modalAjoutPhoto');
 const boutonFormAjoutPhoto = document.getElementById("btn-ajoutPhoto");
 
-
 //ferme la modale et reset les propriétés pour réouverture
 const closeModal = function () {
     modal.style.display = "none";
     overlay.style.display = "none";
     modalGallery.style.display = "grid";
     document.getElementById('modalChamps').reset();
-    //document.getElementById('modalAjoutPhoto').reset();
     modalAjoutPhoto.innerHTML = "";
     genererModalAjoutPhotoContent();
     modalForm.style.display = "none";
@@ -216,7 +185,6 @@ const closeModal = function () {
     deleteGalleryButton.style.display = null;
     btnModal.innerText = "Ajouter une photo";
     btnModal.style.backgroundColor = "#1D6154";
-
 };
 
 //e click sur croix pour fermer modale
@@ -230,7 +198,6 @@ xMarkIcon.addEventListener("click", function (event) {
 overlay.addEventListener("click", closeModal);
 
 function submitForm() {
-    //event.preventDefault();
     /* vérifie taille et type de fichier */
     input.addEventListener("change", async function () {
         const image = input.files[0];
@@ -242,6 +209,7 @@ function submitForm() {
             alert("La taille maximum du fichier est de 4mo");
             return;
         }
+
         /* affichage ds modale de la nouvelle photo, à la place du contenu de div#modalAjoutPhoto */
         modalAjoutPhoto.innerHTML = "";
         const reader = new FileReader();
@@ -252,9 +220,9 @@ function submitForm() {
             newImage.className = "previewPhoto";
             newImage.src = image.src;
             modalAjoutPhoto.appendChild(newImage);
-
         };
     });
+
     //si tt les champs remplis: changer btnModal à "#1D6154"
     document.querySelectorAll('.formInput').forEach(input => {
         input.addEventListener('change', event => {
@@ -266,7 +234,6 @@ function submitForm() {
         });
     });
 };
-
 
 //e click sur bouton modale x changer config 
 btnModal.addEventListener("click", function (event) {
@@ -302,35 +269,14 @@ btnModal.addEventListener("click", function (event) {
             body: formContent
         });
     };
-
 });
-
 
 //e click sur la flèche x revenir à 1ere config de la modale
 arrow.addEventListener("click", function (event) {
     event.preventDefault();
     closeModal();
     btnEditClick();
-    // modal.style.display = null;
-    // overlay.style.display = null;
-
-    // modalGallery.style.display = "grid";
-    // modalForm.style.display = "none";
-    // arrow.style.display = "none";
-    // document.getElementById("modalTitle").innerText = "Galerie photo";
-    // deleteGalleryButton.style.display = null;
-    // btnModal.innerText = "Ajouter une photo";
-    // btnModal.style.backgroundColor = "#1D6154";
-
-
 });
-
-    // //rajouter press enter = click sur bouton modale
-    // window.addEventListener('keydown', function (event){
-    //     if (event.key === "Enter") {
-
-    // };
-    // });
 
 
 

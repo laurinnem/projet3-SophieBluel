@@ -396,7 +396,6 @@ label {
 /*logo + btn modifier*/
 #edit {
 	/*display:none; ds html*/
-
 	position: relative;
 	left: 62%;
 	bottom: 55px;
@@ -433,13 +432,11 @@ label {
 	left: 0;
 	top: 500px;
 	width: 100%;
-
 }
 
 .modal-wrapper {
 	position: relative;
 	margin: auto;
-
 	width: 630px;
 	height: 731px;
 	padding: 30px 80px 30px 80px;
@@ -510,7 +507,6 @@ label {
 	width: 20px;
 	height: 20px;
 	border-radius: 3px;
-
 }
 
 #modalGallery img.trashIcon:hover {
@@ -531,7 +527,6 @@ label {
 #photoIcon {
 	width: 58px;
 	height: 46px;
-
 }
 
 #btn-ajoutPhoto {
@@ -542,7 +537,6 @@ label {
 
 .previewPhoto {
 	height: 100%;
-
 }
 
 #modalForm {
@@ -585,7 +579,6 @@ a#sup {
 	left: 246px;
 	bottom: 50px;
 	color: red;
-
 }
 
 h3 {

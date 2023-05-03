@@ -1,5 +1,3 @@
-//charge DOM content avant d'éxécuter la fonction (script ds head)
-
 document.addEventListener('DOMContentLoaded', function (event) {
     const seConnecter = document.querySelector("#btn-seConnecter");
 
