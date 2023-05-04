@@ -65,10 +65,19 @@ loginLogout.addEventListener("click", function (event) {
 });
 
 //récupération images de l'API
-let works = await fetch('http://localhost:5678/api/works');
-works = await works.json();
+// let works = await fetch('http://localhost:5678/api/works');
+// works = await works.json();
+async function works() {
+    return fetch("http://localhost:5678/api/works")
+        .then(function (response) {
+            if (response.ok) {
+                return response.json();
+            };
+        });
+};
 //création éléments de la gallerie ds modale
 function genererModalGallery(works) {
+    console.log(works);
     for (let i = 0; i < works.length; i++) {
         const figure = works[i];
         const workElement = document.createElement("figure");
@@ -92,7 +101,7 @@ function genererModalGallery(works) {
         workElement.appendChild(editWork);
     };
 };
-genererModalGallery(works);
+genererModalGallery(await works());
 
 //e click sur modifier x open modale 
 btnEdit.addEventListener("click", function (event) {
@@ -216,9 +225,11 @@ function submitForm() {
         reader.readAsDataURL(image);
         reader.onload = function () {
             image.src = reader.result;
+            console.log(image);
             const newImage = document.createElement("img");
             newImage.className = "previewPhoto";
             newImage.src = image.src;
+            newImage.setAttribute("id", "photo");
             modalAjoutPhoto.appendChild(newImage);
         };
     });
@@ -267,17 +278,30 @@ btnModal.addEventListener("click", function (event) {
                 "Authorization": "Bearer " + token
             },
             body: formContent
-        });
+        })
+
+            .then(async function () {
+
+                closeModal();
+                modalGallery.innerHTML = "";
+                genererModalGallery(await works());
+
+            });
     };
+
+
+    //e click sur la flèche x revenir à 1ere config de la modale
+    arrow.addEventListener("click", function (event) {
+        event.preventDefault();
+        // const previewPhoto = document.querySelector(".previewPhoto");
+        // console.log(document.querySelector(".previewPhoto"));
+        // previewPhoto.remove();
+        console.log(input.files);
+        //FileReader.abort();
+
+        closeModal();
+        btnEditClick();
+    });
+
 });
-
-//e click sur la flèche x revenir à 1ere config de la modale
-arrow.addEventListener("click", function (event) {
-    event.preventDefault();
-    closeModal();
-    btnEditClick();
-});
-
-
-
 
