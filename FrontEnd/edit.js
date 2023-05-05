@@ -1,3 +1,4 @@
+import { genererWorks } from "./works.js";
 const sectionWorks = document.querySelector(".gallery");
 const token = window.sessionStorage.getItem("token");
 const loginLogout = document.getElementById("btn-loginLogout");
@@ -77,7 +78,6 @@ async function works() {
 };
 //création éléments de la gallerie ds modale
 function genererModalGallery(works) {
-    console.log(works);
     for (let i = 0; i < works.length; i++) {
         const figure = works[i];
         const workElement = document.createElement("figure");
@@ -142,8 +142,11 @@ trashIcons.forEach((trashIcon) => {
             .then(function (response) {
                 if (response.status === 204) {
                     figure.remove();
-                    btnEditClick();
                 };
+            })
+            .then(async function () {
+                sectionWorks.innerHTML = "";
+                genererWorks(await works());
             });
     });
 });
@@ -169,7 +172,7 @@ function genererModalAjoutPhotoContent() {
     formAjoutPhoto.appendChild(iconePhoto);
     formAjoutPhoto.appendChild(boutonAjoutPhoto);
     formAjoutPhoto.appendChild(typeFile);
-    console.log(boutonAjoutPhoto);
+
     boutonAjoutPhoto.onclick = function () {
         inputClick();
         submitForm();
@@ -201,6 +204,7 @@ const xMarkIcon = document.getElementById("xMarkIcon");
 xMarkIcon.addEventListener("click", function (event) {
     event.preventDefault();
     closeModal();
+
 });
 
 //e click en dehors de la modale x fermer modale
@@ -225,26 +229,25 @@ function submitForm() {
         reader.readAsDataURL(image);
         reader.onload = function () {
             image.src = reader.result;
-            console.log(image);
             const newImage = document.createElement("img");
             newImage.className = "previewPhoto";
             newImage.src = image.src;
             newImage.setAttribute("id", "photo");
             modalAjoutPhoto.appendChild(newImage);
         };
-    });
-
-    //si tt les champs remplis: changer btnModal à "#1D6154"
-    document.querySelectorAll('.formInput').forEach(input => {
-        input.addEventListener('change', event => {
-            if (document.getElementById("uploadImage").value.length != 0 && inputTitle.value != "" && inputCategorie.value != "") {
-                btnModal.style.backgroundColor = "#1D6154";
-            } else {
-                btnModal.style.backgroundColor = "#A7A7A7";
-            }
-        });
-    });
+    }, { once: true });
 };
+
+//si tt les champs remplis: changer btnModal à "#1D6154"
+document.querySelectorAll('.formInput').forEach(input => {
+    input.addEventListener('change', event => {
+        if (document.getElementById("uploadImage").value.length != 0 && inputTitle.value != "" && inputCategorie.value != "") {
+            btnModal.style.backgroundColor = "#1D6154";
+        } else {
+            btnModal.style.backgroundColor = "#A7A7A7";
+        }
+    });
+});
 
 //e click sur bouton modale x changer config 
 btnModal.addEventListener("click", function (event) {
@@ -285,23 +288,17 @@ btnModal.addEventListener("click", function (event) {
                 closeModal();
                 modalGallery.innerHTML = "";
                 genererModalGallery(await works());
+                sectionWorks.innerHTML = "";
+                genererWorks(await works());
 
             });
     };
 
-
     //e click sur la flèche x revenir à 1ere config de la modale
     arrow.addEventListener("click", function (event) {
         event.preventDefault();
-        // const previewPhoto = document.querySelector(".previewPhoto");
-        // console.log(document.querySelector(".previewPhoto"));
-        // previewPhoto.remove();
-        console.log(input.files);
-        //FileReader.abort();
-
         closeModal();
         btnEditClick();
     });
-
 });
 

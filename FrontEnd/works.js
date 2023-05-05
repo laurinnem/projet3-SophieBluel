@@ -1,9 +1,16 @@
 //récupération des travaux
-let works = await fetch('http://localhost:5678/api/works');
-works = await works.json();
+async function works() {
+    return fetch("http://localhost:5678/api/works")
+        .then(function (response) {
+            if (response.ok) {
+                return response.json();
+            };
+        });
+};
+const galleryWorks = await works();
 
-//génération des travaux sur la gallerie page d'accueil
-function genererWorks(works) {
+//génération des travaux sur la gallerie de la page d'accueil
+export function genererWorks(works) {
     for (let i = 0; i < works.length; i++) {
         const figure = works[i];
         const sectionWorks = document.querySelector(".gallery");
@@ -20,12 +27,11 @@ function genererWorks(works) {
     };
 };
 
-genererWorks(works);
+genererWorks(await works());
 
 //récupération des catégories des travaux
 let categories = await fetch('http://localhost:5678/api/categories');
 categories = await categories.json();
-const reponseCategories = JSON.stringify(categories);
 
 //génération des boutons x filtrer travaux par catégories
 function genererFiltres(categories) {
@@ -42,8 +48,8 @@ function genererFiltres(categories) {
 
         //e click s bouton filtre
         boutonFiltre.addEventListener("click", function () {
-            const objetsFiltre = works.filter(function (works) {
-                return works.category.name === filtreTitle;
+            const objetsFiltre = galleryWorks.filter(function (galleryWorks) {
+                return galleryWorks.category.name === filtreTitle;
             });
             document.querySelector(".gallery").innerHTML = "";
             genererWorks(objetsFiltre);
@@ -55,7 +61,7 @@ genererFiltres(categories);
 const boutonTous = document.querySelector("#btn-tous");
 boutonTous.addEventListener("click", function () {
     document.querySelector(".gallery").innerHTML = "";
-    genererWorks(works);
+    genererWorks(galleryWorks);
 });
 
 
