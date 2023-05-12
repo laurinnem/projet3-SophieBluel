@@ -13,6 +13,8 @@ const deleteGalleryButton = document.getElementById("sup");
 const inputTitle = document.getElementById('photoTitle');
 const inputCategorie = document.getElementById('photoCategorie');
 const input = document.getElementById("uploadImage");
+let trashIcons = document.querySelectorAll(".trashIcon");
+let photos = document.querySelectorAll(".photoWork");
 
 function btnEditClick() {
     btnEdit.click();
@@ -66,8 +68,6 @@ loginLogout.addEventListener("click", function (event) {
 });
 
 //récupération images de l'API
-// let works = await fetch('http://localhost:5678/api/works');
-// works = await works.json();
 async function works() {
     return fetch("http://localhost:5678/api/works")
         .then(function (response) {
@@ -76,6 +76,7 @@ async function works() {
             };
         });
 };
+
 //création éléments de la gallerie ds modale
 function genererModalGallery(works) {
     for (let i = 0; i < works.length; i++) {
@@ -99,7 +100,11 @@ function genererModalGallery(works) {
         workElement.appendChild(trashIcon);
         workElement.appendChild(maximiseIcon);
         workElement.appendChild(editWork);
-    };
+    }
+    trashIcons = document.querySelectorAll(".trashIcon");
+    photos = document.querySelectorAll(".photoWork");
+    trashIconClick();
+    maximiseOver();
 };
 genererModalGallery(await works());
 
@@ -111,45 +116,53 @@ btnEdit.addEventListener("click", function (event) {
 });
 
 //e mouseover sur photo pour montrer maximiseIcon
-const photos = document.querySelectorAll(".photoWork");
-photos.forEach((photo) => {
-    const trash = photo.nextSibling;
-    const maximise = trash.nextSibling;
-    photo.addEventListener("mouseover", function (event) {
-        event.preventDefault();
-        maximise.style.display = "block";
+photos = document.querySelectorAll(".photoWork");
+function maximiseOver() {
+    photos.forEach((photo) => {
+        const trash = photo.nextSibling;
+        const maximise = trash.nextSibling;
+        photo.addEventListener("mouseover", function (event) {
+            event.preventDefault();
+            maximise.style.display = "block";
+        });
+        photo.addEventListener("mouseout", function (event) {
+            event.preventDefault();
+            maximise.style.display = "none";
+        });
     });
-    photo.addEventListener("mouseout", function (event) {
-        event.preventDefault();
-        maximise.style.display = "none";
-    });
-});
+};
 
 //e click sur icône poubelle x delete photo ds  API + DOM 
-const trashIcons = document.querySelectorAll(".trashIcon");
-trashIcons.forEach((trashIcon) => {
-    trashIcon.addEventListener("click", (event) => {
-        const figure = trashIcon.parentNode;
-        let id = figure.getAttribute("data-id");
-        fetch("http://localhost:5678/api/works/" + id, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + token
-            },
-        })
+function trashIconClick() {
+    trashIcons.forEach((trashIcon) => {
+        trashIcons = document.querySelectorAll(".trashIcon");
 
-            .then(function (response) {
-                if (response.status === 204) {
-                    figure.remove();
-                };
+        trashIcon.addEventListener("click", (event) => {
+            const figure = trashIcon.parentNode;
+            let id = figure.getAttribute("data-id");
+            fetch("http://localhost:5678/api/works/" + id, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + token
+                },
             })
-            .then(async function () {
-                sectionWorks.innerHTML = "";
-                genererWorks(await works());
-            });
+
+                .then(function (response) {
+                    if (response.status === 204) {
+                        figure.remove();
+                    };
+                })
+
+                .then(async function () {
+                    modalGallery.innerHTML = "";
+                    genererModalGallery(await works());
+                    sectionWorks.innerHTML = "";
+                    genererWorks(await works());
+                });
+        });
     });
-});
+};
 
 //formulaire pour ajouter photo
 const formAjoutPhoto = document.createElement("div");
@@ -177,12 +190,9 @@ function genererModalAjoutPhotoContent() {
         inputClick();
         submitForm();
     };
-
-
 };
 genererModalAjoutPhotoContent();
 const modalAjoutPhoto = document.getElementById('modalAjoutPhoto');
-const boutonFormAjoutPhoto = document.getElementById("btn-ajoutPhoto");
 
 //ferme la modale et reset les propriétés pour réouverture
 const closeModal = function () {
@@ -204,7 +214,6 @@ const xMarkIcon = document.getElementById("xMarkIcon");
 xMarkIcon.addEventListener("click", function (event) {
     event.preventDefault();
     closeModal();
-
 });
 
 //e click en dehors de la modale x fermer modale
@@ -284,13 +293,13 @@ btnModal.addEventListener("click", function (event) {
         })
 
             .then(async function () {
-
                 closeModal();
                 modalGallery.innerHTML = "";
                 genererModalGallery(await works());
                 sectionWorks.innerHTML = "";
                 genererWorks(await works());
-
+                photos = document.querySelectorAll(".photoWork");
+                trashIcons = document.querySelectorAll(".trashIcon");
             });
     };
 
@@ -301,4 +310,3 @@ btnModal.addEventListener("click", function (event) {
         btnEditClick();
     });
 });
-
