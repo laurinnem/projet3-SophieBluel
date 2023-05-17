@@ -142,14 +142,22 @@ table {
 body {
 	max-width: 1140px;
 	margin: auto;
+	margin-top: 70px;
 	font-family: 'Work Sans';
 	font-size: 14px;
+	overflow-x: hidden;
 }
 
 header {
 	display: flex;
 	justify-content: space-between;
 	margin: 50px 0
+}
+
+main {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 section {
@@ -181,6 +189,43 @@ h2 {
 	font-weight: 700;
 	font-size: 30px;
 	color: #1D6154
+}
+
+#headerEdit {
+	/*visibility:hidden ds html*/
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 20px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 60px;
+	background-color: #000000;
+}
+
+#modeEditIcon {
+	width: 115px;
+	height: 22px;
+}
+
+#btn-publierChangements {
+	color: black;
+	font-family: "Work Sans";
+	font-size: 14px;
+	font-weight: 700;
+	background-color: white;
+	border-color: white;
+	border-style: solid;
+	border-radius: 20px 20px 20px 20px;
+	height: 37px;
+	padding: 0 20px 0 20px;
+	margin: 0 5px 0 5px;
+}
+
+#btn-publierChangements:hover {
+	cursor: pointer;
 }
 
 nav ul {
@@ -218,9 +263,14 @@ nav li {
 #introduction {
 	display: flex;
 	align-items: center;
+	padding-bottom: 80px;
+	padding-right: 55px;
 }
 
 #introduction figure {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
 	flex: 1
 }
 
@@ -231,7 +281,11 @@ nav li {
 }
 
 #introduction article {
-	flex: 1
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	flex: 1;
+
 }
 
 #introduction h2 {
@@ -244,7 +298,8 @@ nav li {
 
 #portfolio h2 {
 	text-align: center;
-	margin-bottom: 1em;
+	padding-bottom: 30px;
+	padding-left: 90px;
 }
 
 #barre-filtres {
@@ -252,8 +307,8 @@ nav li {
 	flex-flow: row wrap;
 	justify-content: center;
 
-	margin-top: 51px;
-	margin-bottom: 51px;
+	margin-top: 20px;
+	margin-bottom: 10px;
 }
 
 .btn {
@@ -274,7 +329,7 @@ nav li {
 	cursor: pointer;
 }
 
-.btn:focus {
+button#btn-tous {
 	color: white;
 	background-color: #1D6154;
 }
@@ -282,6 +337,7 @@ nav li {
 .gallery {
 	width: 100%;
 	display: grid;
+	padding: 50px 55px 0px 55px;
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-column-gap: 20px;
 	grid-row-gap: 20px;
@@ -366,10 +422,14 @@ footer nav ul {
 	flex-direction: column;
 }
 
-input {
+input,
+select,
+option {
 	height: 50px;
-	font-size: 1.2em;
+	font-size: 1em;
+	font-family: "Work Sans";
 	border: none;
+	margin: 5px 0 5px 0;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
@@ -393,24 +453,73 @@ label {
 	color: black;
 }
 
-/*logo + btn modifier*/
-#edit {
-	/*display:none; ds html*/
-	position: relative;
-	left: 62%;
-	bottom: 55px;
+#portfolio {
+	display: flex;
+	flex-direction: column;
 }
 
-#editLogo {
+#titreEdit {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+/*logo + btn modifier*/
+#portfolio div#edit3 {
+	/*visibility:hidden; ds html*/
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 8px;
+	position: relative;
+	width: 100px;
+	padding-bottom: 30px;
+	padding-left: 30px;
+	margin: 0;
+}
+
+#introduction div#edit1 {
+	/*visibility:hidden; ds html*/
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 8px;
+	padding-top: 15px;
+	padding-left: 54px;
+	position: relative;
+}
+
+#introduction div#edit2 {
+	/*visibility:hidden; ds html*/
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 8px;
+	padding-bottom: 15px;
+	position: relative;
+
+}
+
+#edit1:hover,
+#edit2:hover,
+#edit3:hover {
+	cursor: pointer;
+}
+
+img#editLogo {
 	width: 20px;
 	height: 20px;
 }
 
-#btn-edit {
+#edit1 a#btn-edit1,
+#edit2 a#btn-edit2,
+#edit3 a#btn-edit3 {
 	font-family: 'Work Sans';
 	font-weight: 400;
 	font-size: 14px;
+	color: #000000;
 	text-decoration: none;
+	padding-bottom: 0px;
 }
 
 /*modale*/
@@ -418,7 +527,7 @@ label {
 	/*display:none; ds html*/
 	z-index: 1;
 	position: fixed;
-	top: 0;
+	top: 60px;
 	left: 0;
 	width: 100%;
 	height: 100%;
@@ -426,12 +535,13 @@ label {
 }
 
 #modalSection {
-	/*display:none; ds html*/
+	/*visibility:hidden; ds html*/
 	z-index: 2;
+	top: 30vh;
+
 	position: fixed;
-	left: 0;
-	top: 500px;
-	width: 100%;
+	width: 630px;
+	height: 731px;
 }
 
 .modal-wrapper {
@@ -544,6 +654,12 @@ label {
 }
 
 #modalChamps input {
+	width: 100%;
+	margin-top: 10px;
+	margin-bottom: 35px;
+}
+
+#modalChamps select {
 	width: 100%;
 	margin-top: 10px;
 	margin-bottom: 35px;

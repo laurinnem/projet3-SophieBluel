@@ -2,7 +2,7 @@ import { genererWorks } from "./works.js";
 const sectionWorks = document.querySelector(".gallery");
 const token = window.sessionStorage.getItem("token");
 const loginLogout = document.getElementById("btn-loginLogout");
-const btnEdit = document.getElementById("btn-edit");
+const btnEdit = document.getElementById("edit3");
 const modal = document.getElementById("modalSection");
 const overlay = document.getElementById("overlay");
 const modalGallery = document.getElementById("modalGallery");
@@ -33,21 +33,28 @@ function genererListeCategories(categories) {
     for (let i = 0; i < categories.length; i++) {
         const elementListeCategorie = document.createElement('option');
         elementListeCategorie.value = categories[i].name;
+        elementListeCategorie.innerText = categories[i].name;
         elementListeCategorie.setAttribute('data-value', categories[i].id)
-        const listeAllCategories = document.getElementById('listeDeroulanteCategories');
+        const listeAllCategories = document.getElementById('photoCategorie');
         listeAllCategories.appendChild(elementListeCategorie);
     };
 };
 genererListeCategories(categories);
+console.log(categories);
 
 //display editMode (boutton modifier/logout) et cache les filtres
 if (token) {
-    document.getElementById("edit").style.display = null;
+    document.getElementById("edit1").style.visibility = null;
+    document.getElementById("edit2").style.visibility = null;
+    document.getElementById("edit3").style.visibility = null;
+    document.getElementById("headerEdit").style.visibility = null;
     document.getElementById("barre-filtres").style.display = "none";
     loginLogout.setAttribute("href", "index.html");
     loginLogout.innerText = "Logout";
 } else {
-    document.getElementById("edit").style.display = "none";
+    document.getElementById("edit1").style.visibility = "hidden";
+    document.getElementById("edit2").style.visibility = "hidden";
+    document.getElementById("edit3").style.visibility = "hidden";
     document.getElementById("barre-filtres").style.display = "flex";
     loginLogout.setAttribute("href", "login.html");
     loginLogout.innerText = "Login";
@@ -111,7 +118,7 @@ genererModalGallery(await works());
 //e click sur modifier x open modale 
 btnEdit.addEventListener("click", function (event) {
     event.preventDefault();
-    modal.style.display = null;
+    modal.style.visibility = null;
     overlay.style.display = null;
 });
 
@@ -196,7 +203,7 @@ const modalAjoutPhoto = document.getElementById('modalAjoutPhoto');
 
 //ferme la modale et reset les propriétés pour réouverture
 const closeModal = function () {
-    modal.style.display = "none";
+    modal.style.visibility = "hidden";
     overlay.style.display = "none";
     modalGallery.style.display = "grid";
     document.getElementById('modalChamps').reset();
@@ -275,7 +282,7 @@ btnModal.addEventListener("click", function (event) {
 
     } else if (btnModal.innerText === "Valider" && btnModal.style.backgroundColor === "rgb(29, 97, 84)") {
         const image = input.files[0];
-        const selectedOption = document.querySelector(`#${inputCategorie.list.id} option[value="${inputCategorie.value}"]`);
+        const selectedOption = document.querySelector(`#${inputCategorie.id} option[value="${inputCategorie.value}"]`);
         const categoryId = selectedOption.getAttribute("data-value");
         const formContent = new FormData();
         formContent.append("title", inputTitle.value);

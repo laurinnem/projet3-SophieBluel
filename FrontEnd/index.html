@@ -16,8 +16,12 @@
 </head>
 
 <body>
+	<!--header mode edition-->
+	<div id="headerEdit" style="visibility:hidden;">
+		<img src="./assets/icons/iconeEdition.jpg" alt="logo mode édition" id="modeEditIcon">
+		<button class="btn" id="btn-publierChangements">publier les changements</button>
+	</div>
 	<div id="overlay" style="display:none;">
-
 	</div>
 	<header>
 		<h1 id="sophie">Sophie Bluel <span>Architecte d'intérieur</span></h1>
@@ -31,11 +35,53 @@
 		</nav>
 	</header>
 	<main>
+		<!--modale-->
+		<aside id="modalSection" style="visibility:hidden;">
+			<div class="modal-wrapper">
+				<h3 id="modalTitle">Galerie photo </h3>
+				<img src="./assets/icons/Xmark.png" alt="icone fermer modale" id="xMarkIcon">
+				<img src="./assets/icons/arrow.png" alt="flèche retour galerie" id="arrowPrevious"
+					style="display:none;">
+				<div id="modalGallery" style="display:grid;">
+					<!--gallerie de la modale générée ds edit.js-->
+				</div>
+				<div id="modalForm" style="display:none;">
+					<!-- div #modalAjoutPhoto générée ds edit.js (avec bouton ajout photo / aperçu photo)-->
+					<form id="modalChamps">
+						<input type="file" accept="image/jpg, image/png, image/jPEG" id="uploadImage" class="formInput"
+							style="display:none;" required>
+						<label for="title">Titre</label><br>
+						<input type="text" name="title" id="photoTitle" class="formInput" required>
+						<br>
+						<label for="categorie">Catégorie</label><br>
+						<select name="categorie" id="photoCategorie" class="formInput" autocomplete="off" required>
+							<option value="" disabled selected style="display:none;"></option>
+						</select>
+
+					</form>
+				</div>
+				<hr>
+				<button id="btnModal" class="btn">Ajouter une photo</button><br>
+				<a src="" id="sup" style="display:block;">Supprimer la galerie</a>
+
+			</div>
+		</aside>
+
 		<section id="introduction">
 			<figure>
 				<img src="./assets/images/sophie-bluel.png" alt="">
+				<div id="edit1" style="visibility:hidden;">
+					<!--bouton modifier-->
+					<img src="./assets/icons/edit.png" alt="logo modifier" id="editLogo">
+					<a href="" id="btn-edit1">modifier</a>
+				</div>
 			</figure>
 			<article>
+				<div id="edit2" style="visibility:hidden;">
+					<!--bouton modifier-->
+					<img src="./assets/icons/edit.png" alt="logo modifier" id="editLogo">
+					<a href="" id="btn-edit2">modifier</a>
+				</div>
 				<h2>Designer d'espace</h2>
 				<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison
 					finale du chantier.</p>
@@ -45,50 +91,22 @@
 				<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG,
 					décorateur(trice)</p>
 			</article>
+
 		</section>
 		<section id="portfolio">
-
-			<h2>Mes Projets</h2>
-			<div id="edit" style="display:none;">
-				<!--bouton modifier-->
-				<img src="./assets/icons/edit.png" alt="logo modifier" id="editLogo">
-				<a href="#modal1" id="btn-edit">modifier</a>
+			<div id="titreEdit">
+				<h2>Mes Projets</h2>
+				<div id="edit3" style="visibility:hidden;">
+					<!--bouton modifier-->
+					<img src="./assets/icons/edit.png" alt="logo modifier" id="editLogo">
+					<a href="" id="btn-edit3">modifier</a>
+				</div>
 			</div>
 			<div id="barre-filtres" style="display:flex;">
 				<button class="btn" id="btn-tous">Tous</button>
 				<!--autres boutons filtres générés ds works.js-->
 			</div>
 
-			<!--modale-->
-			<aside id="modalSection" style="display:none;">
-				<div class="modal-wrapper">
-					<h3 id="modalTitle">Galerie photo </h3>
-					<img src="./assets/icons/Xmark.png" alt="icone fermer modale" id="xMarkIcon">
-					<img src="./assets/icons/arrow.png" alt="flèche retour galerie" id="arrowPrevious"
-						style="display:none;">
-					<div id="modalGallery" style="display:grid;">
-						<!--gallerie de la modale générée ds edit.js-->
-					</div>
-					<div id="modalForm" style="display:none;">
-						<!-- div #modalAjoutPhoto générée ds edit.js (avec bouton ajout photo / aperçu photo)-->
-						<form id="modalChamps">
-							<input type="file" accept="image/jpg, image/png, image/jPEG" id="uploadImage"
-								class="formInput" style="display:none;" required>
-							<label for="title">Titre</label><br>
-							<input type="text" name="title" id="photoTitle" class="formInput" required>
-							<br>
-							<label for="categorie">Catégorie</label><br>
-							<input type="text" list="listeDeroulanteCategories" name="categorie" id="photoCategorie"
-								class="formInput" autocomplete="off" required>
-							<datalist id="listeDeroulanteCategories"></datalist>
-						</form>
-					</div>
-					<hr>
-					<button id="btnModal" class="btn">Ajouter une photo</button><br>
-					<a src="" id="sup" style="display:block;">Supprimer la galerie</a>
-
-				</div>
-			</aside>
 
 
 			<div class="gallery">
